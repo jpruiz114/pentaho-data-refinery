@@ -27,7 +27,7 @@
     <dependency.apache-xmlgraphics.revision>1.8</dependency.apache-xmlgraphics.revision>
     <pentaho-metadata.version>9.0.0.0-SNAPSHOT</pentaho-metadata.version>
     <dependency.commons.collections.revision>3.2.2</dependency.commons.collections.revision>
-    <dependency.jaxrs.revision>1.1.1</dependency.jaxrs.revision>
+    <javax.ws.rs-api.version>2.0</javax.ws.rs-api.version>
     <maven-bundle-plugin.version>2.4.0</maven-bundle-plugin.version>
     <dependency.junit.revision>4.7</dependency.junit.revision>
     <pentaho-modeler.version>9.0.0.0-SNAPSHOT</pentaho-modeler.version>
@@ -164,6 +164,12 @@
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-core</artifactId>
       <version>${dependency.jersey.revision}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.ws.rs</groupId>
+          <artifactId>jsr311-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>
@@ -181,10 +187,18 @@
       <artifactId>jersey-client</artifactId>
       <version>${dependency.jersey.revision}</version>
     </dependency>
+    <!-- provide test time javax.ws.rs.ext.RuntimeDelegate implementation -->
+    <dependency>
+        <groupId>org.glassfish.jersey.core</groupId>
+        <artifactId>jersey-common</artifactId>
+        <version>2.26</version>
+        <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>javax.ws.rs</groupId>
-      <artifactId>jsr311-api</artifactId>
-      <version>${dependency.jaxrs.revision}</version>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>${javax.ws.rs-api.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
